@@ -36,8 +36,4 @@ ENV NODE_ENV=production
 
 EXPOSE 3000
 
-# Distroless doesn't support shell commands for healthcheck
-# Railway will handle health checks at the platform level
-
-# Run the standalone binary directly
 CMD ["/app/server"]
