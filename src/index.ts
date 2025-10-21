@@ -1,7 +1,19 @@
+import { logger } from "@bogeychan/elysia-logger";
 import { Elysia } from "elysia";
 
-const app = new Elysia().get("/", () => "Hello Elysia").listen(3000);
+const PORT = process.env.PORT;
+const app = new Elysia()
+  .use(
+    logger({
+      level: "error",
+    })
+  )
+  .get("/", (ctx) => {
+    ctx.log.error(ctx, "Context");
+    ctx.log.info(ctx.request, "Request"); // noop
 
-console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
-);
+    return "Hello World";
+  })
+  .listen(PORT);
+
+process.stdout.write(`Listening on ${app.server?.url}`);
