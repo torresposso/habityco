@@ -1,12 +1,13 @@
 FROM oven/bun:slim AS build
 WORKDIR /app
 
-# Copy dependency files
-COPY package.json bun.lockb ./
+# Copy dependency files (lockfile is optional)
+COPY package.json bun.lockb* ./
 RUN bun install --frozen-lockfile
 
-# Copy source code
+# Copy source code and build
 COPY . .
+RUN bun run build
 
 # Compile to standalone binary
 RUN bun build \
@@ -17,17 +18,16 @@ RUN bun build \
     --outfile server \
     ./dist/server/entry.mjs
 
-# Use minimal base image (no Bun runtime needed!)
+# Use minimal base image
 FROM gcr.io/distroless/base-debian12 AS runtime
 
-# Add OCI labels
 LABEL org.opencontainers.image.source="https://github.com/torresposso/habityco"
 LABEL org.opencontainers.image.description="Habit tracking application"
 LABEL org.opencontainers.image.licenses="MIT"
 
 WORKDIR /app
 
-# Copy only the compiled binary (includes Bun runtime!)
+# Copy only the compiled binary
 COPY --from=build /app/server /app/server
 
 ENV HOST=0.0.0.0
@@ -37,3 +37,4 @@ ENV NODE_ENV=production
 EXPOSE 3000
 
 CMD ["/app/server"]
+
