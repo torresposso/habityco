@@ -15,7 +15,7 @@ RUN bun build \
     --minify-syntax \
     --target bun-linux-x64 \
     --outfile server \
-    ./src/index.ts
+    ./src/index.tsx
 
 # Use minimal distroless base image
 FROM gcr.io/distroless/base-debian12 AS runtime
