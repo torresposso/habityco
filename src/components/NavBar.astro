@@ -1,0 +1,44 @@
+---
+import Userinfo from "./Userinfo.astro";
+const user = Astro.locals.user;
+---
+
+<div class="navbar bg-base-300 w-full h-[5vh]">
+  <div class="navbar-start lg:hidden">
+    <label
+      for="my-drawer-2"
+      aria-label="open sidebar"
+      class="btn btn-square btn-ghost"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        class="inline-block h-6 w-6 stroke-current"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </label>
+  </div>
+  <div class="hidden lg:navbar-start lg:block"></div>
+  <div class="navbar-center">
+    <div class=""><h1><a href="/">TareaCo</a></h1></div>
+  </div>
+  <div class="navbar-end mr-2">
+    {
+      user ? (
+        <Userinfo {user} />
+      ) : (
+        <div>
+          <a class="btn btn-ghost" href="/login">
+            Log In
+          </a>
+        </div>
+      )
+    }
+  </div>
+</div>

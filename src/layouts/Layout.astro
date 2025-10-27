@@ -1,0 +1,27 @@
+---
+import "@/assets/css/app.css";
+import Drawerside from "@/components/DrawerSide.astro";
+import Navbar from "@/components/NavBar.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>HabityCo</title>
+  </head>
+  <body>
+    <div class="drawer lg:drawer-open">
+      <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content flex flex-col">
+        <!-- Navbar -->
+        <Navbar />
+        <div class="container mx-auto"><slot /></div>
+      </div>
+      <Drawerside />
+    </div>
+  </body>
+</html>
