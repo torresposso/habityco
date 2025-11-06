@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --mode client && vite build",
-    "start": "bun run build && cd ./dist && bun index.js"
+    "start": "cd dist && bun index.js",
+    "postinstall": "bun run build"
   },
   "private": true,
   "dependencies": {
