@@ -1,4 +1,3 @@
-import DrawerSide from "../components/DrawerSide";
 import Navbar from "../components/Navbar";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
@@ -25,16 +24,8 @@ export default jsxRenderer(({ children }) => {
         <Link href="/app/style.css" rel="stylesheet" />
       </head>
       <body>
-        <div className="drawer">
-          <input id="full-drawer" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content flex flex-col">
-            {/* Navbar */}
-            <Navbar />
-            {/* Page content here */}
-            {children}
-          </div>
-          <DrawerSide />
-        </div>
+        <Navbar />
+        <main>{children}</main>
       </body>
     </html>
   );
